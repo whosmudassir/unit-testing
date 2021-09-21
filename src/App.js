@@ -5,8 +5,8 @@ import Random from "./components/Random/Random";
 const App = () => {
   return (
     <div>
-      {/* <Todo /> */}
-      <Random />
+      <Todo />
+      {/* <Random /> */}
     </div>
   );
 };
