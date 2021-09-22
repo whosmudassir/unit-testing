@@ -84,11 +84,12 @@ describe("Add Input", () => {
     expect(todoitem.length).toBe(3);
   });
 
-  // //
-  // it("delete btn", () => {
-  //   render(<Todo />);
-  //   addTodo(["todo1", "todo2", "todo3"]);
-  //   const todoitem = screen.getAllByTestId("single-todo");
-  //   expect(todoitem.length).toBe(3);
-  // });
+  //
+  it("delete btn", async () => {
+    render(<Todo />);
+    addTodo(["todo1", "todo2", "todo3"]);
+    const todoitem = screen.getAllByTestId("single-todo");
+    const deleteBtn = await screen.findByRole("button", { name: /delete/i });
+    expect(todoitem.length).toBe(3);
+  });
 });
