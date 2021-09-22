@@ -67,13 +67,13 @@ export default function App() {
           value={input}
           onChange={inputHandler}
         />
-        <button type="submit" disabled={!input}>
+        <button data-testid="add-btn" type="submit" disabled={!input}>
           Add Todo
         </button>
       </form>
 
       {todos.map((todo) => (
-        <div key={todo.id}>
+        <div key={todo.id} data-testid="single-todo">
           <input
             type="checkbox"
             onChange={() => toggle(todo.id)}
