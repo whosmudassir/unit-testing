@@ -84,12 +84,15 @@ describe("Add Input", () => {
     expect(todoitem.length).toBe(3);
   });
 
-  //
+  //delete single todo with help of index
   it("delete btn", async () => {
     render(<Todo />);
     addTodo(["todo1", "todo2", "todo3"]);
     const todoitem = screen.getAllByTestId("single-todo");
-    const deleteBtn = await screen.findByRole("button", { name: /delete/i });
     expect(todoitem.length).toBe(3);
+    const deleteBtn = screen.getByTestId("delete-btn-0");
+    fireEvent.click(deleteBtn);
+    const todoitemAfter = screen.getAllByTestId("single-todo");
+    expect(todoitemAfter.length).toBe(2);
   });
 });

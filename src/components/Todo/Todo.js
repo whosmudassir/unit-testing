@@ -72,7 +72,7 @@ export default function App() {
         </button>
       </form>
 
-      {todos.map((todo) => (
+      {todos.map((todo, index) => (
         <div key={todo.id} data-testid="single-todo">
           <input
             type="checkbox"
@@ -82,7 +82,12 @@ export default function App() {
 
           {todo.completed ? <strike>{todo.text} </strike> : todo.text}
 
-          <button onClick={() => deleteTodo(todo.id)}>delete</button>
+          <button
+            data-testid={`delete-btn-${index}`}
+            onClick={() => deleteTodo(todo.id)}
+          >
+            delete
+          </button>
         </div>
       ))}
 
