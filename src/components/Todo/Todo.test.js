@@ -3,35 +3,35 @@ import Todo from "./Todo";
 import { render, fireEvent, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
-describe("Practice tests", () => {
-  //get by
-  it("Get the word Todo List", () => {
-    render(<Todo />);
-    const header = screen.getByText(/Todo List/);
-    expect(header).toBeInTheDocument();
-  });
+// describe("Practice tests", () => {
+//   //get by
+//   it("Get the word Todo List", () => {
+//     render(<Todo />);
+//     const header = screen.getByText(/Todo List/);
+//     expect(header).toBeInTheDocument();
+//   });
 
-  //find by
-  it("using find by", async () => {
-    render(<Todo />);
-    const header = await screen.findByText(/Todo List/i);
-    expect(header).toBeInTheDocument();
-  });
+//   //find by
+//   it("using find by", async () => {
+//     render(<Todo />);
+//     const header = await screen.findByText(/Todo List/i);
+//     expect(header).toBeInTheDocument();
+//   });
 
-  //query by
-  it("using query by", () => {
-    render(<Todo />);
-    const header = screen.queryByText(/cats/i);
-    expect(header).not.toBeInTheDocument();
-  });
+//   //query by
+//   it("using query by", () => {
+//     render(<Todo />);
+//     const header = screen.queryByText(/cats/i);
+//     expect(header).not.toBeInTheDocument();
+//   });
 
-  //get by all
-  it("number of buttons", () => {
-    render(<Todo />);
-    const buttons = screen.getAllByRole("button");
-    expect(buttons.length).toBe(3);
-  });
-});
+//   //get by all
+//   it("number of buttons", () => {
+//     render(<Todo />);
+//     const buttons = screen.getAllByRole("button");
+//     expect(buttons.length).toBe(3);
+//   });
+// });
 
 //main section
 const addTodo = (todos) => {
@@ -45,6 +45,14 @@ const addTodo = (todos) => {
     });
     fireEvent.click(addBtn);
   });
+};
+
+const selectAll = (todos) => {
+  const selectAllBtn = screen.getByRole("button", { name: /select all/i });
+  todos.forEach((todo) => {
+    todo.complete = true;
+  });
+  fireEvent.click(selectAllBtn);
 };
 
 describe("Add Input", () => {
@@ -94,5 +102,15 @@ describe("Add Input", () => {
     fireEvent.click(deleteBtn);
     const todoitemAfter = screen.getAllByTestId("single-todo");
     expect(todoitemAfter.length).toBe(2);
+  });
+
+  //delete all button
+  it("select all button", () => {
+    render(<Todo />);
+    const todos = ["todo1", "todo2", "todo3"];
+    addTodo(todos);
+    const todoitem = screen.getAllByTestId("single-todo");
+    expect(todos[1]).toHaveProperty("completed", false);
+    // selectAll(todos)
   });
 });
